@@ -1,0 +1,73 @@
+# ── Secrets & environment ────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+local.settings.json
+azure.credentials.json
+
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+venv/
+.venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ── Notebooks ────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Node / frontend ──────────────────────────────────────
+node_modules/
+.next/
+out/
+build/
+.vite/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# ── Data (do not commit real site imagery or permits) ────
+data/sample_images/*
+!data/sample_images/.gitkeep
+!data/sample_images/README.md
+data/permits/*
+!data/permits/.gitkeep
+!data/permits/README.md
+*.mp4
+*.avi
+
+# ── Model artefacts ──────────────────────────────────────
+models/
+*.pt
+*.pth
+*.onnx
+*.h5
+weights/
+
+# ── Azure / Terraform ────────────────────────────────────
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.azure/
+
+# ── IDE / OS ─────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp

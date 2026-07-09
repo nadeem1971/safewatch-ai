@@ -1,0 +1,263 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1420" width="1100" height="1420" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5A6B7B"/>
+    </marker>
+    <marker id="arwLight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9AA7B4"/>
+    </marker>
+    <linearGradient id="v1band" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F7FAFD"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1100" height="1420" fill="#FFFFFF"/>
+
+  <!-- ===== TITLE ===== -->
+  <text x="40" y="46" font-size="27" font-weight="700" fill="#123A5E">SafeWatch AI</text>
+  <text x="40" y="70" font-size="14.5" fill="#5A6B7B">Agentic Site Safety &amp; Compliance Platform — Reference Architecture (Azure)</text>
+  <text x="40" y="90" font-size="12.5" fill="#8A97A4" font-style="italic">The LLM proposes  ·  Deterministic policy disposes  ·  A human approves</text>
+
+  <!-- legend -->
+  <rect x="800" y="34" width="14" height="14" rx="3" fill="#1F4E79"/>
+  <text x="822" y="46" font-size="12.5" fill="#3A4A5A">v1 — In scope</text>
+  <rect x="800" y="58" width="14" height="14" rx="3" fill="#FFFFFF" stroke="#9AA7B4" stroke-width="1.4" stroke-dasharray="3,2"/>
+  <text x="822" y="70" font-size="12.5" fill="#3A4A5A">Phase 2 — Roadmap</text>
+
+  <!-- ===== v1 BAND BACKGROUND ===== -->
+  <rect x="28" y="112" width="1044" height="962" rx="10" fill="url(#v1band)" stroke="#1F4E79" stroke-width="1.6"/>
+  <rect x="28" y="112" width="1044" height="26" rx="10" fill="#1F4E79"/>
+  <rect x="28" y="128" width="1044" height="10" fill="#1F4E79"/>
+  <text x="44" y="130" font-size="12.5" font-weight="700" fill="#FFFFFF" letter-spacing="1">V1 — BUILD SCOPE</text>
+
+  <!-- ============ LAYER 1 ============ -->
+  <text x="44" y="168" font-size="12" font-weight="700" fill="#1F4E79">LAYER 1</text>
+  <text x="44" y="185" font-size="13.5" font-weight="600" fill="#123A5E">Data Sources</text>
+  <text x="44" y="202" font-size="11" fill="#8A97A4">On-ground evidence</text>
+  <text x="44" y="216" font-size="11" fill="#8A97A4">&amp; regulatory corpus</text>
+
+  <rect x="196" y="152" width="270" height="78" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="212" y="176" font-size="13" font-weight="600" fill="#123A5E">Site Imagery</text>
+  <text x="212" y="196" font-size="11.5" fill="#5A6B7B">Construction cameras, industrial</text>
+  <text x="212" y="212" font-size="11.5" fill="#5A6B7B">CCTV, mobile inspection photos</text>
+
+  <rect x="484" y="152" width="270" height="78" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="500" y="176" font-size="13" font-weight="600" fill="#123A5E">Compliance Documents</text>
+  <text x="500" y="196" font-size="11.5" fill="#5A6B7B">Permit-to-Work, method</text>
+  <text x="500" y="212" font-size="11.5" fill="#5A6B7B">statements, risk assessments</text>
+
+  <rect x="772" y="152" width="278" height="78" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="788" y="176" font-size="13" font-weight="600" fill="#123A5E">Regulatory Knowledge Base</text>
+  <text x="788" y="196" font-size="11.5" fill="#5A6B7B">OSHAD, TRAKHEES, MOMRA,</text>
+  <text x="788" y="212" font-size="11.5" fill="#5A6B7B">ISO 45001</text>
+
+  <line x1="550" y1="230" x2="550" y2="252" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <!-- ============ LAYER 2 ============ -->
+  <line x1="44" y1="248" x2="1056" y2="248" stroke="#E4EAF0" stroke-width="1"/>
+  <text x="44" y="278" font-size="12" font-weight="700" fill="#1F4E79">LAYER 2</text>
+  <text x="44" y="295" font-size="13.5" font-weight="600" fill="#123A5E">Ingestion</text>
+  <text x="44" y="312" font-size="11" fill="#8A97A4">Event-driven landing</text>
+
+  <rect x="238" y="262" width="290" height="66" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="254" y="286" font-size="13" font-weight="600" fill="#123A5E">Azure Blob Storage</text>
+  <text x="254" y="306" font-size="11.5" fill="#5A6B7B">Landing zone — images, documents</text>
+
+  <line x1="528" y1="295" x2="576" y2="295" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <rect x="586" y="262" width="290" height="66" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="602" y="286" font-size="13" font-weight="600" fill="#123A5E">Azure Event Grid</text>
+  <text x="602" y="306" font-size="11.5" fill="#5A6B7B">Triggers downstream AI workflow</text>
+
+  <line x1="550" y1="328" x2="550" y2="352" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <!-- ============ LAYER 3 ============ -->
+  <line x1="44" y1="348" x2="1056" y2="348" stroke="#E4EAF0" stroke-width="1"/>
+  <text x="44" y="378" font-size="12" font-weight="700" fill="#1F4E79">LAYER 3</text>
+  <text x="44" y="395" font-size="13.5" font-weight="600" fill="#123A5E">AI Processing</text>
+  <text x="44" y="412" font-size="11" fill="#8A97A4">Core capabilities</text>
+  <text x="44" y="426" font-size="11" fill="#8A97A4">powering the agents</text>
+
+  <rect x="196" y="362" width="270" height="94" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="212" y="386" font-size="13" font-weight="600" fill="#123A5E">Computer Vision</text>
+  <text x="212" y="403" font-size="11" fill="#8A97A4">Azure AI Vision</text>
+  <text x="212" y="422" font-size="11.5" fill="#5A6B7B">Fine-tuned PPE model — helmet,</text>
+  <text x="212" y="438" font-size="11.5" fill="#5A6B7B">vest, harness, unsafe zone entry</text>
+
+  <rect x="484" y="362" width="270" height="94" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="500" y="386" font-size="13" font-weight="600" fill="#123A5E">Document Validation</text>
+  <text x="500" y="403" font-size="11" fill="#8A97A4">Azure AI Document Intelligence</text>
+  <text x="500" y="422" font-size="11.5" fill="#5A6B7B">Extracts permit fields, validates</text>
+  <text x="500" y="438" font-size="11.5" fill="#5A6B7B">expiry and required approvals</text>
+
+  <rect x="772" y="362" width="278" height="94" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="788" y="386" font-size="13" font-weight="600" fill="#123A5E">Compliance RAG</text>
+  <text x="788" y="403" font-size="11" fill="#8A97A4">Azure AI Search + Azure OpenAI</text>
+  <text x="788" y="422" font-size="11.5" fill="#5A6B7B">Hybrid retrieval — grounded</text>
+  <text x="788" y="438" font-size="11.5" fill="#5A6B7B">clause citation, no free generation</text>
+
+  <line x1="550" y1="456" x2="550" y2="478" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <!-- ============ LAYER 4 ============ -->
+  <line x1="44" y1="474" x2="1056" y2="474" stroke="#E4EAF0" stroke-width="1"/>
+  <text x="44" y="504" font-size="12" font-weight="700" fill="#1F4E79">LAYER 4</text>
+  <text x="44" y="521" font-size="13.5" font-weight="600" fill="#123A5E">Agentic</text>
+  <text x="44" y="538" font-size="13.5" font-weight="600" fill="#123A5E">Orchestration</text>
+  <text x="44" y="556" font-size="11" fill="#8A97A4">LangGraph state graph</text>
+
+  <rect x="196" y="488" width="200" height="98" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="212" y="512" font-size="13" font-weight="600" fill="#123A5E">Azure Container</text>
+  <text x="212" y="529" font-size="13" font-weight="600" fill="#123A5E">Apps</text>
+  <text x="212" y="550" font-size="11.5" fill="#5A6B7B">Serverless hosting for</text>
+  <text x="212" y="566" font-size="11.5" fill="#5A6B7B">the agent runtime</text>
+
+  <rect x="418" y="488" width="632" height="98" rx="7" fill="#FAFCFE" stroke="#1F4E79" stroke-width="1.3"/>
+  <text x="434" y="510" font-size="12.5" font-weight="600" fill="#1F4E79">LangGraph Multi-Agent Orchestration</text>
+
+  <rect x="434" y="524" width="120" height="46" rx="5" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="1.2"/>
+  <text x="494" y="545" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">Vision</text>
+  <text x="494" y="560" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">Agent</text>
+  <line x1="554" y1="547" x2="578" y2="547" stroke="#5A6B7B" stroke-width="1.5" marker-end="url(#arw)"/>
+
+  <rect x="584" y="524" width="120" height="46" rx="5" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="1.2"/>
+  <text x="644" y="545" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">Document</text>
+  <text x="644" y="560" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">Agent</text>
+  <line x1="704" y1="547" x2="728" y2="547" stroke="#5A6B7B" stroke-width="1.5" marker-end="url(#arw)"/>
+
+  <rect x="734" y="524" width="120" height="46" rx="5" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="1.2"/>
+  <text x="794" y="545" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">RAG</text>
+  <text x="794" y="560" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">Agent</text>
+  <line x1="854" y1="547" x2="878" y2="547" stroke="#5A6B7B" stroke-width="1.5" marker-end="url(#arw)"/>
+
+  <rect x="884" y="524" width="150" height="46" rx="5" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="1.2"/>
+  <text x="959" y="545" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">Report</text>
+  <text x="959" y="560" font-size="12" font-weight="600" fill="#123A5E" text-anchor="middle">Agent</text>
+
+  <line x1="550" y1="586" x2="550" y2="608" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <!-- ============ LAYER 5 ============ -->
+  <line x1="44" y1="604" x2="1056" y2="604" stroke="#E4EAF0" stroke-width="1"/>
+  <text x="44" y="634" font-size="12" font-weight="700" fill="#1F4E79">LAYER 5</text>
+  <text x="44" y="651" font-size="13.5" font-weight="600" fill="#123A5E">Risk &amp;</text>
+  <text x="44" y="668" font-size="13.5" font-weight="600" fill="#123A5E">Governance</text>
+  <text x="44" y="686" font-size="11" fill="#8A97A4">Bounded LLM authority</text>
+
+  <rect x="196" y="618" width="400" height="112" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="212" y="642" font-size="13" font-weight="600" fill="#123A5E">Risk Scoring Agent</text>
+  <text x="212" y="662" font-size="11.5" fill="#5A6B7B">Composite score from PPE severity, zone class,</text>
+  <text x="212" y="678" font-size="11.5" fill="#5A6B7B">worker count, permit status, contractor history</text>
+  <rect x="212" y="690" width="368" height="26" rx="4" fill="#F1F5F9"/>
+  <text x="224" y="708" font-size="11.5" font-weight="600" fill="#1F4E79">Output: Risk Score 0–100</text>
+
+  <rect x="620" y="618" width="430" height="112" rx="7" fill="#FFFFFF" stroke="#1F4E79" stroke-width="1.6"/>
+  <text x="636" y="642" font-size="13" font-weight="600" fill="#123A5E">Governance Agent — Deterministic Policy Engine</text>
+  <text x="636" y="662" font-size="11.5" fill="#5A6B7B">Hard-coded rules. Not model judgment.</text>
+  <text x="636" y="682" font-size="11.5" font-family="Consolas, monospace" fill="#1F4E79">IF risk &lt; 30            → auto-log</text>
+  <text x="636" y="698" font-size="11.5" font-family="Consolas, monospace" fill="#1F4E79">IF risk ≥ 80            → escalation committee</text>
+  <text x="636" y="714" font-size="11.5" font-family="Consolas, monospace" fill="#1F4E79">IF permit expired       → block closure</text>
+
+  <line x1="550" y1="730" x2="550" y2="752" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <!-- ============ LAYER 6 ============ -->
+  <line x1="44" y1="748" x2="1056" y2="748" stroke="#E4EAF0" stroke-width="1"/>
+  <text x="44" y="778" font-size="12" font-weight="700" fill="#1F4E79">LAYER 6</text>
+  <text x="44" y="795" font-size="13.5" font-weight="600" fill="#123A5E">Human in</text>
+  <text x="44" y="812" font-size="13.5" font-weight="600" fill="#123A5E">the Loop</text>
+  <text x="44" y="830" font-size="11" fill="#8A97A4">Non-negotiable gate</text>
+
+  <rect x="196" y="762" width="240" height="96" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="212" y="786" font-size="13" font-weight="600" fill="#123A5E">Azure Logic Apps</text>
+  <text x="212" y="806" font-size="11.5" fill="#5A6B7B">Orchestrates approval</text>
+  <text x="212" y="822" font-size="11.5" fill="#5A6B7B">routing &amp; notification</text>
+  <text x="212" y="843" font-size="11" fill="#8A97A4">Teams  ·  Email (MCP)</text>
+
+  <line x1="436" y1="810" x2="466" y2="810" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <rect x="476" y="762" width="574" height="96" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="492" y="786" font-size="13" font-weight="600" fill="#123A5E">Safety Officer Portal — Risk-Tiered Approval</text>
+
+  <rect x="492" y="798" width="126" height="44" rx="5" fill="#F1F5F9"/>
+  <text x="555" y="816" font-size="11" font-weight="600" fill="#1F4E79" text-anchor="middle">Low  &lt; 30</text>
+  <text x="555" y="832" font-size="11" fill="#5A6B7B" text-anchor="middle">Auto-log</text>
+
+  <rect x="630" y="798" width="126" height="44" rx="5" fill="#F1F5F9"/>
+  <text x="693" y="816" font-size="11" font-weight="600" fill="#1F4E79" text-anchor="middle">Medium 30–59</text>
+  <text x="693" y="832" font-size="11" fill="#5A6B7B" text-anchor="middle">Safety Officer</text>
+
+  <rect x="768" y="798" width="126" height="44" rx="5" fill="#F1F5F9"/>
+  <text x="831" y="816" font-size="11" font-weight="600" fill="#1F4E79" text-anchor="middle">High 60–79</text>
+  <text x="831" y="832" font-size="11" fill="#5A6B7B" text-anchor="middle">HSE Manager</text>
+
+  <rect x="906" y="798" width="128" height="44" rx="5" fill="#E8EEF4"/>
+  <text x="970" y="816" font-size="11" font-weight="600" fill="#1F4E79" text-anchor="middle">Critical ≥ 80</text>
+  <text x="970" y="832" font-size="11" fill="#5A6B7B" text-anchor="middle">Escalation Cttee</text>
+
+  <line x1="550" y1="858" x2="550" y2="880" stroke="#5A6B7B" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <!-- ============ LAYER 6b — record + UI ============ -->
+  <line x1="44" y1="876" x2="1056" y2="876" stroke="#E4EAF0" stroke-width="1"/>
+  <text x="44" y="906" font-size="12" font-weight="700" fill="#1F4E79">LAYER 6b</text>
+  <text x="44" y="923" font-size="13.5" font-weight="600" fill="#123A5E">Record &amp;</text>
+  <text x="44" y="940" font-size="13.5" font-weight="600" fill="#123A5E">Interfaces</text>
+
+  <rect x="196" y="890" width="260" height="86" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="212" y="914" font-size="13" font-weight="600" fill="#123A5E">Azure Cosmos DB</text>
+  <text x="212" y="934" font-size="11.5" fill="#5A6B7B">Incident record, decision trail,</text>
+  <text x="212" y="950" font-size="11.5" fill="#5A6B7B">reviewer, model &amp; policy version</text>
+
+  <rect x="480" y="890" width="270" height="86" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="496" y="914" font-size="13" font-weight="600" fill="#123A5E">Operations Console</text>
+  <text x="496" y="934" font-size="11.5" fill="#5A6B7B">Upload → detect → cite → score</text>
+  <text x="496" y="950" font-size="11.5" fill="#5A6B7B">→ report → submit for approval</text>
+
+  <rect x="774" y="890" width="276" height="86" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.3"/>
+  <text x="790" y="914" font-size="13" font-weight="600" fill="#123A5E">Governance Dashboard</text>
+  <text x="790" y="934" font-size="11.5" fill="#5A6B7B">Risk scores, site &amp; contractor</text>
+  <text x="790" y="950" font-size="11.5" fill="#5A6B7B">rankings, approval metrics</text>
+
+  <text x="196" y="1006" font-size="11.5" fill="#8A97A4" font-style="italic">Every consequential action — escalation, closure, contractor flagging — passes a human gate. This is a design constraint, not a v1 limitation.</text>
+
+  <text x="196" y="1042" font-size="11.5" fill="#8A97A4">v1 excludes: live CCTV stream ingestion · predictive forecasting · multi-tenant governance · production RBAC · mobile app</text>
+
+  <!-- ===== PHASE 2 BAND ===== -->
+  <rect x="28" y="1098" width="1044" height="272" rx="10" fill="#FCFDFE" stroke="#9AA7B4" stroke-width="1.4" stroke-dasharray="6,4"/>
+  <rect x="28" y="1098" width="1044" height="26" rx="10" fill="#9AA7B4"/>
+  <rect x="28" y="1114" width="1044" height="10" fill="#9AA7B4"/>
+  <text x="44" y="1116" font-size="12.5" font-weight="700" fill="#FFFFFF" letter-spacing="1">PHASE 2 — ROADMAP (NOT IN v1 BUILD)</text>
+
+  <text x="44" y="1156" font-size="12" font-weight="700" fill="#7C8A98">LAYER 7</text>
+  <text x="44" y="1173" font-size="13.5" font-weight="600" fill="#5A6B7B">Audit &amp;</text>
+  <text x="44" y="1190" font-size="13.5" font-weight="600" fill="#5A6B7B">Data Layer</text>
+
+  <rect x="196" y="1140" width="400" height="72" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="212" y="1164" font-size="13" font-weight="600" fill="#5A6B7B">Azure Data Lake — Audit Store</text>
+  <text x="212" y="1184" font-size="11.5" fill="#8A97A4">Long-term traceability: model version, prompt version,</text>
+  <text x="212" y="1200" font-size="11.5" fill="#8A97A4">policy version, full AI + human decision history</text>
+
+  <rect x="620" y="1140" width="430" height="72" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="636" y="1164" font-size="13" font-weight="600" fill="#5A6B7B">Azure Monitor — Observability</text>
+  <text x="636" y="1184" font-size="11.5" fill="#8A97A4">Agent traces, system events, hallucination rate,</text>
+  <text x="636" y="1200" font-size="11.5" fill="#8A97A4">citation accuracy, human override rate</text>
+
+  <line x1="550" y1="1212" x2="550" y2="1232" stroke="#9AA7B4" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arwLight)"/>
+
+  <text x="44" y="1266" font-size="12" font-weight="700" fill="#7C8A98">LAYER 8</text>
+  <text x="44" y="1283" font-size="13.5" font-weight="600" fill="#5A6B7B">Watcher &amp;</text>
+  <text x="44" y="1300" font-size="13.5" font-weight="600" fill="#5A6B7B">Intelligence</text>
+
+  <rect x="196" y="1244" width="400" height="72" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="212" y="1268" font-size="13" font-weight="600" fill="#5A6B7B">Watcher Agent</text>
+  <text x="212" y="1288" font-size="11.5" fill="#8A97A4">Recurring violations, rising site risk, approval</text>
+  <text x="212" y="1304" font-size="11.5" fill="#8A97A4">backlog, contractor performance deterioration</text>
+
+  <rect x="620" y="1244" width="430" height="72" rx="7" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="636" y="1268" font-size="13" font-weight="600" fill="#5A6B7B">Predictive Safety Layer</text>
+  <text x="636" y="1288" font-size="11.5" fill="#8A97A4">Trend detection → risk forecast → preventive</text>
+  <text x="636" y="1304" font-size="11.5" fill="#8A97A4">recommendation, ahead of the incident</text>
+
+  <text x="196" y="1344" font-size="11.5" fill="#9AA7B4" font-style="italic">Deferred by design — trend detection and forecasting require a decision history that does not exist at v1.</text>
+
+  <!-- footer -->
+  <text x="40" y="1400" font-size="11" fill="#B0BAC4">SafeWatch AI  ·  Reference Architecture  ·  Nadeem Ahmad &amp; Ashifa Nassar  ·  v1.0</text>
+</svg>
