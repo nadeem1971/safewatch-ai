@@ -25,11 +25,9 @@ jobs:
 
       - name: Lint
         run: ruff check src/ tests/
-        continue-on-error: true
 
       - name: Format check
         run: ruff format --check src/ tests/
-        continue-on-error: true
 
       - name: Type check
         run: mypy src/ --ignore-missing-imports
@@ -37,4 +35,3 @@ jobs:
 
       - name: Test
         run: pytest tests/ -v
-        continue-on-error: true
