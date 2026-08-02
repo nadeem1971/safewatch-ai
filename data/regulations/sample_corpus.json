@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "notice": "SYNTHETIC SAMPLE CORPUS. These clauses are illustrative, written to mirror the structure of real occupational-safety regulations for development and testing. They are NOT authoritative regulatory text and must not be used for compliance certification. Replace with licensed source text before any real deployment.",
+    "schema": {
+      "id": "stable unique id",
+      "regulation": "short regulation identifier",
+      "clause": "clause / section reference",
+      "title": "human-readable clause title",
+      "text": "clause body",
+      "violation_types": "which detection categories this clause governs",
+      "source_uri": "where the authoritative text lives"
+    }
+  },
+  "clauses": [
+    {
+      "id": "oshad-sf38-5.4",
+      "regulation": "OSHAD SF38",
+      "clause": "Section 5.4",
+      "title": "Fall protection for work at height",
+      "text": "Any worker performing tasks at a height of two metres or more above a lower level shall wear an approved full-body safety harness attached to a suitable anchor point. Work at height shall not commence until fall-protection equipment has been inspected and confirmed serviceable.",
+      "violation_types": ["missing_harness", "unsafe_zone_entry"],
+      "source_uri": "https://example.gov/oshad/sf38#5.4"
+    },
+    {
+      "id": "oshad-sf38-6.1",
+      "regulation": "OSHAD SF38",
+      "clause": "Section 6.1",
+      "title": "Head protection in active work zones",
+      "text": "All persons entering an active construction or industrial work zone shall wear an approved safety helmet. Helmets shall be worn correctly, with the chin strap fastened where a risk of displacement exists.",
+      "violation_types": ["missing_helmet"],
+      "source_uri": "https://example.gov/oshad/sf38#6.1"
+    },
+    {
+      "id": "oshad-sf39-3.2",
+      "regulation": "OSHAD SF39",
+      "clause": "Section 3.2",
+      "title": "High-visibility clothing",
+      "text": "Workers on or adjacent to areas with moving plant, vehicles, or lifting operations shall wear high-visibility upper-body clothing that meets the applicable visibility class for the working environment.",
+      "violation_types": ["missing_vest"],
+      "source_uri": "https://example.gov/oshad/sf39#3.2"
+    },
+    {
+      "id": "iso-45001-8.1.2",
+      "regulation": "ISO 45001",
+      "clause": "Clause 8.1.2",
+      "title": "Eliminating hazards and reducing risks",
+      "text": "The organization shall establish processes for the elimination of hazards and reduction of occupational health and safety risks using a hierarchy of controls, including the provision and enforced use of appropriate personal protective equipment where higher-order controls are not reasonably practicable.",
+      "violation_types": ["missing_helmet", "missing_vest", "missing_harness"],
+      "source_uri": "https://example.org/iso-45001#8.1.2"
+    },
+    {
+      "id": "oshad-sf38-7.3",
+      "regulation": "OSHAD SF38",
+      "clause": "Section 7.3",
+      "title": "Restricted and exclusion zones",
+      "text": "Exclusion zones established around excavations, lifting operations, or overhead work shall be physically demarcated. No person shall enter an exclusion zone without authorization from the responsible supervisor and the controls specified in the applicable permit-to-work.",
+      "violation_types": ["unsafe_zone_entry"],
+      "source_uri": "https://example.gov/oshad/sf38#7.3"
+    },
+    {
+      "id": "momra-cs-4.5",
+      "regulation": "MOMRA CS",
+      "clause": "Section 4.5",
+      "title": "Permit-to-work for high-risk activities",
+      "text": "High-risk activities, including work at height, hot work, and confined-space entry, shall be governed by a valid permit-to-work. Work shall not proceed where the permit has expired or where required approvals are absent.",
+      "violation_types": ["missing_harness", "unsafe_zone_entry"],
+      "source_uri": "https://example.gov/momra/cs#4.5"
+    }
+  ]
+}
