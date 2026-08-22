@@ -42,15 +42,9 @@ SEMANTIC_CONFIG_NAME = "safewatch-semantic"
 def build_index(index_name: str) -> SearchIndex:
     """Construct the SearchIndex definition (does not create it remotely)."""
     fields = [
-        SimpleField(
-            name="id", type=SearchFieldDataType.String, key=True, filterable=True
-        ),
-        SearchableField(
-            name="regulation", type=SearchFieldDataType.String, filterable=True
-        ),
-        SearchableField(
-            name="clause", type=SearchFieldDataType.String, filterable=True
-        ),
+        SimpleField(name="id", type=SearchFieldDataType.String, key=True, filterable=True),
+        SearchableField(name="regulation", type=SearchFieldDataType.String, filterable=True),
+        SearchableField(name="clause", type=SearchFieldDataType.String, filterable=True),
         SearchableField(name="title", type=SearchFieldDataType.String),
         SearchableField(name="content", type=SearchFieldDataType.String),
         SearchField(
@@ -112,9 +106,7 @@ def build_index(index_name: str) -> SearchIndex:
 
 def create_index(endpoint: str, api_key: str, index_name: str) -> None:
     """Create or update the index on the live Azure AI Search service."""
-    client = SearchIndexClient(
-        endpoint=endpoint, credential=AzureKeyCredential(api_key)
-    )
+    client = SearchIndexClient(endpoint=endpoint, credential=AzureKeyCredential(api_key))
     index = build_index(index_name)
     result = client.create_or_update_index(index)
     print(f"Index ready: {result.name}")

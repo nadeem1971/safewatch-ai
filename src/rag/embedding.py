@@ -53,9 +53,7 @@ class Embedder:
     def __init__(self) -> None:
         self._client = _build_client()
 
-    @retry(
-        stop=stop_after_attempt(5), wait=wait_exponential(multiplier=1, min=2, max=30)
-    )
+    @retry(stop=stop_after_attempt(5), wait=wait_exponential(multiplier=1, min=2, max=30))
     def embed(self, text: str) -> list[float]:
         response = self._client.embeddings.create(
             model=EMBEDDING_DEPLOYMENT,
