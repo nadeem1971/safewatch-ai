@@ -1,20 +1,26 @@
 """
 SafeWatch AI - HTTP API.
 
-FastAPI layer over the orchestration pipeline. Turns the running system into a
-service the UIs (Operations Console, Governance Dashboard) call.
+FastAPI layer over the orchestration pipeline, plus the human-review endpoints
+the Governance Dashboard uses to close the loop.
 
-Endpoints:
-  POST /incidents            submit an incident (JSON), run the pipeline, persist, return the packet
-  POST /incidents/upload     submit an incident with an image file + permit fields (multipart)
-  GET  /incidents/{id}       fetch a stored incident
-  GET  /incidents            list incidents pending human review (the governance queue)
+Incident intake:
+  POST /incidents            submit an incident (JSON)
+  POST /incidents/upload     submit with an image file + permit fields (multipart)
+
+Governance review (the human gate):
+  GET  /incidents            list incidents pending human review (the queue)
+  GET  /incidents/all        list every incident (dashboard overview)
+  GET  /incidents/{id}       fetch one incident
+  POST /incidents/{id}/decision   record a human decision (approve/reject/escalate)
+  GET  /incidents/{id}/audit      the audit trail for an incident
+  GET  /stats                aggregate counts for the dashboard
+
   GET  /health               liveness
 
-The API owns no domain logic. It validates input, invokes the orchestrator,
-persists the result through the repository interface, and returns the reviewer
-packet. All judgement stays in the agents; all storage stays behind the
-repository.
+The API owns no domain logic. Judgement stays in the agents; the human decision
+is recorded verbatim with its reviewer and an audit record, so the human half of
+the loop is as traceable as the automated half.
 """
 
 from __future__ import annotations
@@ -27,6 +33,7 @@ from src.contracts import ViolationType
 from src.governance.policy_engine import GovernanceEngine
 from src.orchestration.orchestrator import IncidentState, Orchestrator
 from src.persistence.repository import (
+    HUMAN_DECISIONS,
     IncidentRepository,
     InMemoryIncidentRepository,
 )
@@ -35,7 +42,6 @@ from src.risk.scoring import RiskScoringAgent
 
 CORPUS_PATH = "data/regulations/sample_corpus.json"
 
-# Violation types the demo upload flow recognizes, for the honest filename->hint mapping.
 _KNOWN_VIOLATIONS: tuple[str, ...] = (
     "missing_harness",
     "missing_helmet",
@@ -45,8 +51,6 @@ _KNOWN_VIOLATIONS: tuple[str, ...] = (
 
 
 class IncidentRequest(BaseModel):
-    """Incoming incident (JSON path). vision_hint stands in for real detection."""
-
     vision_hint: ViolationType | None = Field(default=None)
     worker_count: int = Field(default=1, ge=0)
     zone_is_elevated: bool = False
@@ -58,15 +62,15 @@ class IncidentRequest(BaseModel):
     contractor_recent_violations: int = Field(default=0, ge=0)
 
 
-def _hint_from_filename(filename: str) -> ViolationType | None:
-    """
-    DEMO STUB: derive the violation hint from the uploaded file's name.
+class DecisionRequest(BaseModel):
+    decision: str = Field(description="approved | rejected | escalated")
+    reviewer: str = Field(default="hse_manager", description="Who is deciding.")
+    note: str = Field(default="", description="Reviewer's rationale.")
 
-    This is NOT computer vision. The real Vision agent (issues #5/#6) will run a
-    fine-tuned PPE detection model on the image bytes. Until then, the upload
-    endpoint reads the intended violation from the filename so the pipeline can
-    be exercised with a real upload UI. Documented as a stub in PRODUCTION-NOTES.
-    """
+
+def _hint_from_filename(filename: str) -> ViolationType | None:
+    """DEMO STUB: derive the violation hint from the file name, not the pixels.
+    Real Vision agent (issues #5/#6) will run a PPE model on the image bytes."""
     lowered = filename.lower()
     for violation in _KNOWN_VIOLATIONS:
         if violation in lowered:
@@ -87,21 +91,14 @@ def create_app(
     repository: IncidentRepository | None = None,
 ) -> FastAPI:
     app = FastAPI(title="SafeWatch AI", version="1.0.0")
-
-    # The two UIs are served separately in dev, so allow browser calls from them.
     app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_methods=["*"],
-        allow_headers=["*"],
+        CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
     )
-
     orch = orchestrator or build_orchestrator()
     repo = repository or InMemoryIncidentRepository()
 
     def _run_and_store(state: IncidentState) -> dict:
-        result = orch.run(state)
-        return repo.save(result["reviewer_packet"])
+        return repo.save(orch.run(state)["reviewer_packet"])
 
     @app.get("/health")
     def health() -> dict:
@@ -125,16 +122,14 @@ def create_app(
     @app.post("/incidents/upload")
     async def submit_incident_upload(
         image: UploadFile = File(...),  # noqa: B008
-        worker_count: int = Form(1),  # noqa: B008
-        zone_is_elevated: bool = Form(False),  # noqa: B008
-        permit_is_valid: bool = Form(True),  # noqa: B008
-        permit_is_expired: bool = Form(False),  # noqa: B008
+        worker_count: int = Form(1),
+        zone_is_elevated: bool = Form(False),
+        permit_is_valid: bool = Form(True),
+        permit_is_expired: bool = Form(False),
     ) -> dict:
-        # Read the file so a real upload happens; detection is stubbed off the name.
         await image.read()
-        hint = _hint_from_filename(image.filename or "")
         state: IncidentState = {
-            "vision_hint": hint,
+            "vision_hint": _hint_from_filename(image.filename or ""),
             "worker_count": worker_count,
             "zone_is_elevated": zone_is_elevated,
             "permit_is_valid": permit_is_valid,
@@ -142,8 +137,17 @@ def create_app(
         }
         record = _run_and_store(state)
         record["_uploaded_filename"] = image.filename
-        record["_detection_source"] = "stub:filename"  # honest about how hint was derived
+        record["_detection_source"] = "stub:filename"
         return record
+
+    @app.get("/incidents")
+    def list_pending() -> list[dict]:
+        """The governance review queue: incidents awaiting human approval."""
+        return repo.list_pending()
+
+    @app.get("/incidents/all")
+    def list_all() -> list[dict]:
+        return repo.list_all()
 
     @app.get("/incidents/{incident_id}")
     def get_incident(incident_id: str) -> dict:
@@ -152,9 +156,43 @@ def create_app(
             raise HTTPException(status_code=404, detail="Incident not found")
         return record
 
-    @app.get("/incidents")
-    def list_pending() -> list[dict]:
-        return repo.list_pending()
+    @app.post("/incidents/{incident_id}/decision")
+    def record_decision(incident_id: str, body: DecisionRequest) -> dict:
+        if body.decision not in HUMAN_DECISIONS:
+            raise HTTPException(
+                status_code=422,
+                detail=f"decision must be one of {HUMAN_DECISIONS}",
+            )
+        updated = repo.record_decision(
+            incident_id=incident_id,
+            decision=body.decision,
+            reviewer=body.reviewer,
+            note=body.note,
+        )
+        if updated is None:
+            raise HTTPException(status_code=404, detail="Incident not found")
+        return updated
+
+    @app.get("/incidents/{incident_id}/audit")
+    def get_audit(incident_id: str) -> list[dict]:
+        if repo.get(incident_id) is None:
+            raise HTTPException(status_code=404, detail="Incident not found")
+        return repo.list_audit(incident_id)
+
+    @app.get("/stats")
+    def stats() -> dict:
+        all_incidents = repo.list_all()
+        by_band: dict[str, int] = {}
+        by_status: dict[str, int] = {}
+        for inc in all_incidents:
+            by_band[inc["risk_band"]] = by_band.get(inc["risk_band"], 0) + 1
+            by_status[inc["status"]] = by_status.get(inc["status"], 0) + 1
+        return {
+            "total": len(all_incidents),
+            "pending_review": len(repo.list_pending()),
+            "by_band": by_band,
+            "by_status": by_status,
+        }
 
     return app
 
